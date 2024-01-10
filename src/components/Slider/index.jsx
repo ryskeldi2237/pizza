@@ -1,6 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import Slider from "react-slick";
+import "./Slider.css";
 export default function Main() {
   const sliders = useSelector((state) => state.item.items[5]);
   const settings = {
@@ -15,7 +16,7 @@ export default function Main() {
     <Slider {...settings}>
       {sliders &&
         sliders.map((item) => (
-          <div className="main" key={item.id}>
+          <div className="slider" key={item.id}>
             <img src={item.imageUrl} alt={`slider`} />
           </div>
         ))}

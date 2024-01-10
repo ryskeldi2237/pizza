@@ -1,0 +1,25 @@
+
+.contacts {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    margin-top: 50px;
+    padding-bottom: 30px;
+  }
+  .contacts__block {
+    position: absolute;
+    width: 480px;
+    height: 180px;
+    left: 35%;
+    top: 30px;
+    background: linear-gradient(45.04deg, #fd9924 -51.05%, #f65b16 134.89%);
+    box-shadow: 0px 70px 90px rgba(253, 55, 36, 0.2),
+      0px 35px 50px rgba(253, 55, 36, 0.2), 0px 20px 25px rgba(253, 55, 36, 0.2);
+    border-radius: 15px;
+    padding-top: 75px;
+    font-size: 24px;
+    line-height: 29px;
+    text-align: center;
+    color: #fff;
+    cursor: pointer;
+  }

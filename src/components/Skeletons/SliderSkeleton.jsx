@@ -1,7 +1,7 @@
 import React from "react";
 import ContentLoader from "react-content-loader";
 
-const SliderLoader = (props) => (
+const SliderSkeleton = (props) => (
   <ContentLoader
     speed={2}
     width={`91%`}
@@ -15,4 +15,4 @@ const SliderLoader = (props) => (
   </ContentLoader>
 );
 
-export default SliderLoader;
+export default SliderSkeleton;

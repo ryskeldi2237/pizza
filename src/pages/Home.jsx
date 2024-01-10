@@ -1,23 +1,37 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Main from "../components/Main";
-import Contact from "../components/Contact";
+import Slider from "../components/Slider";
+import Contact from "../components/Contacts";
 import Content from "../components/Content";
-import SliderLoader from "../components/SliderLoader";
-import { fetchUserById } from "../store/itemSlice";
-export default function Home() {
+import SliderSkelton from "../components/Skeletons/SliderSkeleton";
+import ItemsSkeleton from "../components/Skeletons/ItemsSkeleton";
+import { fetchItems } from "../store/slices/itemSlice";
+
+const Home = () => {
   const dispatch = useDispatch();
   const load = useSelector((state) => state.item.load);
+
   useEffect(() => {
-    setTimeout(() => {
-      dispatch(fetchUserById());
-    }, 500);
+    try {
+      dispatch(fetchItems());
+    } catch (e) {
+      console.error(e);
+    }
   }, [dispatch]);
+
   return (
     <div>
-      <div className="test">{load ? <Main /> : <SliderLoader />}</div>
-      <Content />
+      <div className="test">{load ? <Slider /> : <SliderSkelton />}</div>
+      {load ? (
+        <Content />
+      ) : (
+        Array(8)
+          .fill(0)
+          .map((_, index) => <ItemsSkeleton key={index} />)
+      )}
       <Contact />
     </div>
   );
-}
+};
+
+export default Home;

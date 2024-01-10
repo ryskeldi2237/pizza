@@ -1,5 +1,5 @@
 import React from "react";
-
+import './Footer.css'
 export default function Footer() {
   return (
     <footer className="footer">
@@ -10,7 +10,6 @@ export default function Footer() {
             <li>About us</li>
             <li>Our history</li>
             <li>Vlog "The secret is"</li>
-            <li>Додо ИС</li>
           </ul>
         </div>
         <div className="footer__item">

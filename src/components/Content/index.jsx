@@ -1,19 +1,17 @@
 import React, { useState } from "react";
-import Items from "./Items";
-import Loading from "./Loading";
+import Items from "../Items";
 import { useSelector } from "react-redux";
-
-export default function Content() {
+import "./Content.css";
+function Content() {
   const [activeItem, setActiveItem] = useState(0);
-  function toggleActiveItem(index) {
+  const toggleActiveItem = (index) => {
     setActiveItem(index);
-  }
+  };
   const items = ["Pizzas", "Combos", "Snacks", "Desserts", "Drinks"],
     sizes = ["small", "medium", "large"],
     types = ["thin", "traditional"];
   const data = useSelector((state) => state.item.items);
   const load = useSelector((state) => state.item.load);
-  console.log(data);
   return (
     <div className="content">
       <div className="container">
@@ -45,7 +43,7 @@ export default function Content() {
                   activeItem === outerIndex ? "active-content" : ""
                 }`}
               >
-                {load ? (
+                {load &&
                   data[activeItem].map((item, innerIndex) => (
                     <Items
                       key={`${item}__${innerIndex}`}
@@ -53,10 +51,7 @@ export default function Content() {
                       sizes={sizes}
                       types={types}
                     />
-                  ))
-                ) : (
-                  <Loading key={`loading__${outerIndex}`} />
-                )}
+                  ))}
               </div>
             ))}
         </div>
@@ -64,3 +59,4 @@ export default function Content() {
     </div>
   );
 }
+export default Content;

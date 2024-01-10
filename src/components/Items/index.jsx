@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { addToCart } from "../store/cartSlice";
-import { addPrice } from "../store/priceSlice";
+import { addToCart } from "../../store/slices/cartSlice";
+import { addPrice } from "../../store/slices/priceSlice";
+import "./Items.css";
 export default function Items({ item, sizes, types }) {
   const [activeSize, setActiveSize] = useState(item.sizes[0]);
-  const [activeType, setActiveType] = useState(item.types[0]);
+  const [activeType, setActiveType] = useState(item.types && item.types[0]);
   const dispatch = useDispatch();
   function toggleActiveSize(index) {
     setActiveSize(index);
@@ -15,30 +16,31 @@ export default function Items({ item, sizes, types }) {
   const addProduct = (product) => {
     dispatch(addToCart(product));
     dispatch(addPrice(product.price));
-  }; 
-  
+  };
   return (
-    <div className="pizza-block">
-      <img className="pizza-block__image" src={item.imageUrl} alt="Pizza" />
-      <h4 className="pizza-block__title">{item.name}</h4>
-      <div className="pizza-block__selector">
+    <div className="items-block">
+      <img className="items-block__image" src={item.imageUrl} alt="Pizza" />
+      <h4 className="items-block__title">{item.name}</h4>
+      <div className="items-block__selector">
         <ul>
-          {types &&
-            types.map((type, index) => (
-              <li
-                key={`size_${index}`}
-                onClick={() => toggleActiveType(index)}
-                className={
-                  activeType === index
-                    ? "active"
-                    : !item.types.includes(index)
-                    ? "disabled"
-                    : ""
-                }
-              >
-                {type}{" "}
-              </li>
-            ))}
+          {item.types &&
+            types
+              .filter((type, index) => item.types.includes(index))
+              .map((type, index) => (
+                <li
+                  key={`size_${index}`}
+                  onClick={() => toggleActiveType(index)}
+                  className={
+                    activeType === index
+                      ? "active"
+                      : !item.types.includes(index)
+                      ? "disabled"
+                      : ""
+                  }
+                >
+                  {type}
+                </li>
+              ))}
         </ul>
         <ul>
           {sizes &&
@@ -59,8 +61,8 @@ export default function Items({ item, sizes, types }) {
             ))}
         </ul>
       </div>
-      <div className="pizza-block__bottom">
-        <div className="pizza-block__price">from {item.price} $</div>
+      <div className="items-block__bottom">
+        <div className="items-block__price">from {item.price} $</div>
         <div
           className="button button--outline button--add"
           onClick={() => addProduct(item)}

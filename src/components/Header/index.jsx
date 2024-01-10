@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import Cart from "../pages/Cart";
-
+import Cart from "../Cart";
+import "./Header.css";
 export default function Header() {
   const [show, setShow] = useState(false);
-  const products = useSelector((state) => state.cart.cart);
+  const products = useSelector((state) => state.cart.cart.length);
   const price = useSelector((state) => state.price.price);
   return (
-    <div>
+    <>
       <div className="header">
         <div className="container">
           <div className="header__logo">
@@ -50,12 +50,12 @@ export default function Header() {
                   strokeLinejoin="round"
                 />
               </svg>
-              <span>{products.length}</span>
+              <span>{products}</span>
             </div>
           </div>
         </div>
       </div>
-      {show && <Cart item={setShow} />}
-    </div>
+      {show && <Cart setShow={setShow} />}
+    </>
   );
 }

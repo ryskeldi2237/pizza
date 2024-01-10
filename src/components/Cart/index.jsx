@@ -1,21 +1,23 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { removeFromCart } from "../store/cartSlice";
-import { removePrice } from "../store/priceSlice";
-const Cart = ({ item }) => {
+import { removeFromCart } from "../../store/slices/cartSlice";
+import { removePrice } from "../../store/slices/priceSlice";
+import "./Cart.css";
+const Cart = ({ setShow }) => {
   const dispatch = useDispatch();
-  const products = useSelector((state) => state.cart.cart);
+  const products = useSelector((state) => state.cart);
   function removeProduct(id, price) {
     dispatch(removeFromCart(id));
-    dispatch(removePrice(price))
+    dispatch(removePrice(price));
   }
+  console.log(products.length)
   return (
-    <div className="content-cart">
-      <span className="cart__close" onClick={() => item(false)}>
+    <div className="cart">
+      <span className="cart__close" onClick={() => setShow(false)}>
         ✘
       </span>
-      {products.length >= 1 ? (
-        products.map((product, index) => (
+      {products.cart.length >= 1 ? (
+        products.cart.map((product, index) => (
           <div className="cart__block" key={`${product}__${index}`}>
             <div className="cart__item">
               <img src={product.imageUrl} alt="img" className="cart__img"></img>
@@ -36,13 +38,9 @@ const Cart = ({ item }) => {
         ))
       ) : (
         <div className="container container--cart">
-          <div className="cart cart--empty">
+          <div className="cart--empty">
             <h2>Cart is empty 😕</h2>
-            <p>
-              You did not ordered yet
-              <br />
-              To order go to the main page.
-            </p>
+            <p>You did not ordered yet.</p>
             <img src="img/empty-cart.png" alt="Empty cart" />
           </div>
         </div>

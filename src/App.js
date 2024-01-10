@@ -6,12 +6,12 @@ import "./App.css";
 import "./media.css";
 export default function App() {
   return (
-    <div>
+    <>
       <div className="wrapper">
         <Header />
         <Home />
       </div>
       <Footer />
-    </div>
+    </>
   );
 }
